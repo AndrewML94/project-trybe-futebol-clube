@@ -11,7 +11,8 @@ export interface UserAttribute {
 
 export type UserCreationalAttributes = Omit<UserAttribute, 'id'>;
 
-export default class User extends Model<UserAttribute, UserCreationalAttributes> {
+export default class User extends Model
+  <UserAttribute, UserCreationalAttributes> implements UserAttribute {
   declare id: number;
   declare username: string;
   declare role: string;

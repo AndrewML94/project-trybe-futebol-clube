@@ -8,7 +8,8 @@ export interface TeamAttributes {
 
 export type TeamCreationalAttributes = Omit<TeamAttributes, 'id'>;
 
-export default class TeamModel extends Model<TeamAttributes, TeamCreationalAttributes> {
+export default class TeamModel extends Model
+  <TeamAttributes, TeamCreationalAttributes> implements TeamAttributes {
   declare id: number;
   declare teamName: string;
 }

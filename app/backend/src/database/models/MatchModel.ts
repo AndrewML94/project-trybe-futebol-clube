@@ -13,7 +13,8 @@ export interface MatchAttributes {
 
 export type MatchCreationalAttributes = Omit<MatchAttributes, 'id'>;
 
-export default class MatchModel extends Model<MatchAttributes, MatchCreationalAttributes> {
+export default class MatchModel extends Model
+  <MatchAttributes, MatchCreationalAttributes> implements MatchAttributes {
   declare id: number;
   declare homeTeamId: number;
   declare homeTeamGoals: number;
