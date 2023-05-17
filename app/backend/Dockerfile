@@ -8,7 +8,7 @@ WORKDIR /app-backend
 
 # Copiar os package.json e package-lock.json para o container
 
-COPY package*.json ./
+COPY package* ./
 
 # Instalar as dependências Node
 
