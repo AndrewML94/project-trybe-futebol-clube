@@ -11,7 +11,7 @@ export interface UserAttribute {
 
 export type UserCreationalAttributes = Omit<UserAttribute, 'id'>;
 
-export default class User extends Model
+export default class UserModel extends Model
   <UserAttribute, UserCreationalAttributes> implements UserAttribute {
   declare id: number;
   declare username: string;
@@ -20,7 +20,7 @@ export default class User extends Model
   declare password: string;
 }
 
-User.init({
+UserModel.init({
   id: {
     allowNull: false,
     primaryKey: true,
@@ -44,7 +44,7 @@ User.init({
     type: DataTypes.STRING,
   },
 }, {
-  tableName: 'teams',
+  tableName: 'users',
   underscored: true,
   sequelize: db,
   timestamps: false,
