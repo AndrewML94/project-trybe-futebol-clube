@@ -1,17 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 import { validateToken } from '../utils/auth';
+import { UnauthorizedError } from '../errors';
 
 export default class TokenMiddleware {
-  public static validateToken(req: Request, res: Response, next: NextFunction) {
+  public static validateToken(req: Request, _res: Response, next: NextFunction) {
     const { authorization } = req.headers;
 
-    if (!authorization) return res.status(401).json({ message: 'Token not found' });
+    if (!authorization) throw new UnauthorizedError('Token not found');
 
     try {
       validateToken(authorization);
       next();
     } catch (error) {
-      return res.status(401).json({ message: 'Token must be a valid token' });
+      throw new UnauthorizedError('Token must be a valid token');
     }
   }
 }
