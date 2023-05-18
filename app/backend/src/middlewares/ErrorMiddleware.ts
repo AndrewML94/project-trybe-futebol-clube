@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { NotFoundError, BadRequestError, UnauthorizedError } from '../errors';
+import {
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+  UnprocessableEntityError,
+} from '../errors';
 
 export default class ErrorMiddleware {
   public static handleError(error: Error, _req: Request, res: Response, _next: NextFunction) {
@@ -13,6 +18,10 @@ export default class ErrorMiddleware {
 
     if (error instanceof NotFoundError) {
       return res.status(404).json({ message: error.message });
+    }
+
+    if (error instanceof UnprocessableEntityError) {
+      return res.status(422).json({ message: error.message });
     }
 
     console.error(error);

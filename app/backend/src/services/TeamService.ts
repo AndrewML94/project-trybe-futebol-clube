@@ -1,5 +1,6 @@
 import NotFoundError from '../errors/NotFoundError';
 import TeamModel, { TeamAttributes } from '../database/models/TeamModel';
+import 'express-async-errors';
 
 export default class TeamService {
   public static async findAll(): Promise<TeamAttributes[]> {
@@ -13,7 +14,7 @@ export default class TeamService {
   public static async findById(id: number): Promise<TeamAttributes> {
     const team = await TeamModel.findByPk(id);
 
-    if (!team) throw new NotFoundError('Team not found');
+    if (!team) throw new NotFoundError('There is no team with such id!');
 
     return team.toJSON();
   }
