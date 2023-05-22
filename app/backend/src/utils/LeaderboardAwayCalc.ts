@@ -16,22 +16,22 @@ export interface LeaderboardA {
 
 export default class LeaderboardAwayCalc {
   public static leaderboardAway(matches: ParamsMatch[], team: TeamAttributes) {
-    const playHome = matches.filter((match) => match.awayTeamId === team.id);
-    const goalsFavor = playHome.reduce((acc, cur) => acc + cur.awayTeamGoals, 0);
-    const goalsOwn = playHome.reduce((acc, cur) => acc + cur.homeTeamGoals, 0);
-    const totalPoints = this.totalPoints(playHome);
+    const playAway = matches.filter((match) => match.awayTeamId === team.id);
+    const goalsFavor = playAway.reduce((acc, cur) => acc + cur.awayTeamGoals, 0);
+    const goalsOwn = playAway.reduce((acc, cur) => acc + cur.homeTeamGoals, 0);
+    const totalPoints = this.totalPoints(playAway);
 
     return {
       name: team.teamName,
       totalPoints,
-      totalGames: playHome.filter((elem) => elem).length,
-      totalVictories: playHome.filter((elem) => elem.awayTeamGoals > elem.homeTeamGoals).length,
-      totalDraws: playHome.filter((elem) => elem.awayTeamGoals === elem.homeTeamGoals).length,
-      totalLosses: playHome.filter((elem) => elem.awayTeamGoals < elem.homeTeamGoals).length,
+      totalGames: playAway.filter((elem) => elem).length,
+      totalVictories: playAway.filter((elem) => elem.awayTeamGoals > elem.homeTeamGoals).length,
+      totalDraws: playAway.filter((elem) => elem.awayTeamGoals === elem.homeTeamGoals).length,
+      totalLosses: playAway.filter((elem) => elem.awayTeamGoals < elem.homeTeamGoals).length,
       goalsFavor,
       goalsOwn,
       goalsBalance: goalsFavor - goalsOwn,
-      efficiency: +((totalPoints / (playHome.length * 3)) * 100).toFixed(2),
+      efficiency: +((totalPoints / (playAway.length * 3)) * 100).toFixed(2),
     };
   }
 

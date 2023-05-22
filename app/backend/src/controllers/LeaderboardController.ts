@@ -9,4 +9,8 @@ export default class LeaderboardController {
   public static async getAllLeaderboardAway(_req: Request, res: Response) {
     return res.status(200).json(await LeaderboardService.getAllLeaderboardAway());
   }
+
+  public static async getAllLeaderboard(_req: Request, res: Response) {
+    return res.status(200).json(await LeaderboardService.getAllLeaderboard());
+  }
 }
