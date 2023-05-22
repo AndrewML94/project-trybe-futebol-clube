@@ -8,7 +8,7 @@ export default class TeamService {
 
     if (!allTeams) throw new NotFoundError('There is no registered team');
 
-    return allTeams.map((team) => team.toJSON());
+    return allTeams.map((team) => team);
   }
 
   public static async findById(id: number): Promise<TeamAttributes> {
@@ -16,6 +16,6 @@ export default class TeamService {
 
     if (!team) throw new NotFoundError('There is no team with such id!');
 
-    return team.toJSON();
+    return team;
   }
 }
