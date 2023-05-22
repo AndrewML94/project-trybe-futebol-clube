@@ -3,19 +3,19 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { app } from '../app';
-import TeamModel, { TeamAttributes } from '../database/models/TeamModel';
+import TeamModel from '../database/models/TeamModel';
 import { allTeams, team } from './mocks/team.mock';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Teste da rota /teams', function () {
+describe('Teste da rota /teams:', function () {
   afterEach(()=>{
     sinon.restore()
   })
 
-  it('Ao utilizar GET na rota, o array de objetos contendo os times é retornado', async function () {
+  it('Ao utilizar GET na rota, o array de objetos contendo os times é retornado;', async function () {
     sinon.stub(TeamModel, 'findAll').resolves(allTeams  as TeamModel[]);
 
     const response = await chai.request(app).get('/teams');
@@ -24,7 +24,7 @@ describe('Teste da rota /teams', function () {
     expect(response.body).to.be.deep.equal(allTeams);
   });
 
-  it('Ao utilizar GET na rota, o array de objetos contendo os times é retornado', async function () {
+  it('Ao utilizar GET na rota, o array de objetos contendo os times é retornado;', async function () {
     sinon.stub(TeamModel, 'findAll').resolves(null as any);
 
     const response = await chai.request(app).get('/teams');
@@ -34,12 +34,12 @@ describe('Teste da rota /teams', function () {
   });
 });
 
-describe('Teste da rota /teams/id', function () {
+describe('Teste da rota /teams/id:', function () {
   afterEach(()=>{
     sinon.restore()
   })
 
-  it('Ao utilizar GET na rota, informando um id válido, é retornado um time', async function () {
+  it('Ao utilizar GET na rota, informando um id válido, é retornado um time;', async function () {
     sinon.stub(TeamModel, 'findByPk').resolves(team  as TeamModel);
 
     const response = await chai.request(app).get('/teams/1');
@@ -48,7 +48,7 @@ describe('Teste da rota /teams/id', function () {
     expect(response.body).to.be.deep.equal(team);
   });
 
-  it('Ao utilizar GET na rota, informando um id inválido, é retornado um erro', async function () {
+  it('Ao utilizar GET na rota, informando um id inválido, é retornado um erro;', async function () {
     sinon.stub(TeamModel, 'findByPk').resolves(null);
 
     const response = await chai.request(app).get('/teams/1');
