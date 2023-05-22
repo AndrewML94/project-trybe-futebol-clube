@@ -5,7 +5,7 @@ import * as jsonWebToken from 'jsonwebtoken';
 import chaiHttp = require('chai-http');
 import { app } from '../app';
 import UserModel from '../database/models/UserModel';
-import { correctUser, incorrectUser } from './mocks/user.mock';
+import { correctUser, incorrectUser, user } from './mocks/user.mock';
 
 chai.use(chaiHttp);
 
@@ -43,11 +43,12 @@ describe('Teste da rota /login:', function () {
     expect(response.body).to.be.deep.equal({ message: 'All fields must be filled' });
   });
 
-  it('Ao utilizar POST na rota, verifica se ao inserir o email e senha corretas, é retornado o token'), async function () {
-    sinon.stub(UserModel, 'findOne').resolves(correctUser as unknown as UserModel);
+  it('Ao utilizar POST na rota, verifica se ao inserir o email e senha corretas, é retornado um token', async function () {
+    sinon.stub(UserModel, 'findOne').resolves(user as unknown as UserModel);
+
     const response = await chai.request(app).post('/login').send(correctUser);
 
     expect(response.status).to.be.equal(200);
     expect(response.body.token).to.be.an('string');
-  }
+  });
 });
